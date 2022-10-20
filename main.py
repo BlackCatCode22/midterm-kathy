@@ -129,18 +129,108 @@ sort_desc = sorted(num_of_sender_msgs.items(),key=lambda x:x[1],reverse=True)
 for i in sort_desc:
     print(i[0],i[1])
 
+# Sort dictionary by values in ascending order
+print("\nDictionary sorted by values in ascending order")
+sort_desc = sorted(num_of_sender_msgs.items(),key=lambda x:x[1])
+for i in sort_desc:
+    print(i[0],i[1])
 
 print("\nDisplaying Tuples in a dictionary:")
 print("Key-Value Pairs are:")
 for (myKey, myVal) in num_of_sender_msgs.items():
     print(myKey,myVal)
+print("\n...and printed as tuples...sorted...ascending")
+my_tuples = sorted(num_of_sender_msgs.items(),key=lambda x:x[1])
+print(my_tuples)
+
+print("\n...and printed as tuples...sorted...descending")
+my_tuples = sorted(num_of_sender_msgs.items(),key=lambda x:x[1],reverse=True)
+print(my_tuples)
 
 # Closing the file
 my_file_handle.close()
 print("\nFile closed")
 
+
 # Advanced: Use prefix@domain as the sender and the get() method in dictionary
-print("\n******* Advanced Using the prefix@domain as the Sender and using get() ********\n")
+print("\n\n******* Advanced Using the prefix@domain as the Sender and using get() ********\n")
+
+# Open the file.
+file_name = "mbox-short.txt"
+my_file_handle = open(file_name)
+
+# Counter to tabulate the number of messages from each sender
+num_of_sender_msgs = dict()
+
+# Use the loop you created for prefix/domain parsing.
+for my_line in my_file_handle:
+   if (my_line[0:5] == "From "):
+        my_list_of_words = my_line.split()
+        sender = my_list_of_words[1]
+
+        # add item to dictionary
+        # TODO: Explain how this line of code works and how it replaces the code on lines 88-95.
+        # This line of code contains the prefix@domain, it is the key in the dictionary and adds 1
+        # it replaces the previous code by not having to determine if it exists or not
+        num_of_sender_msgs[sender] = num_of_sender_msgs.get(sender, 0) + 1
+
+# Loop through dictionary to find sender with most messages
+largest_count = None
+largest_word = None
+
+# TODO: What other programming language can use two variables as loop control variables?
+# other languages would be C++ and Java
+for my_key,my_value in num_of_sender_msgs.items():
+    if largest_count is None or my_value > largest_count:
+        largest_word = my_key
+        largest_count = my_value
+
+# Display the sender with the most messages
+print("Most messages is by sender..." + largest_word + " with " + str(largest_count) + " messages")
+
+# Display the dictionary of sender messages
+print("\nThe dictionary of num_of_sender_msgs looks like:")
+print(num_of_sender_msgs)
+
+# Sort dictionary and display
+print("\nDictionary sorted by keys")
+print(sorted(num_of_sender_msgs.keys()))
+
+# Sort dictionary by values and display
+print("\nDictionary sorted by values")
+print(sorted(num_of_sender_msgs.values()))
+
+# Sort by key
+print("\nDictionary sorted by items")
+print(dict(sorted(num_of_sender_msgs.items())))
+
+# Sort dictionary by values in descending order
+print("\nDictionary sorted by values in descending order")
+sort_desc = sorted(num_of_sender_msgs.items(),key=lambda x:x[1],reverse=True)
+for i in sort_desc:
+    print(i[0],i[1])
+
+# Sort dictionary by values in ascending order
+print("\nDictionary sorted by values in ascending order")
+sort_desc = sorted(num_of_sender_msgs.items(),key=lambda x:x[1])
+for i in sort_desc:
+    print(i[0],i[1])
 
 
+print("\nDisplaying Tuples in a dictionary:")
+print("Key-Value Pairs are:")
+for (myKey, myVal) in num_of_sender_msgs.items():
+    print(myKey,myVal)
+print("\n...and printed as tuples...sorted...ascending")
+my_tuples = sorted(num_of_sender_msgs.items(),key=lambda x:x[1])
+print(my_tuples)
+
+print("\n...and printed as tuples...sorted...descending")
+my_tuples = sorted(num_of_sender_msgs.items(),key=lambda x:x[1],reverse=True)
+print(my_tuples)
+
+
+# Closing the file
+my_file_handle.close()
+print("\nFile closed")
 
